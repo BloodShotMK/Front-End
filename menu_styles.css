@@ -96,3 +96,28 @@ body {
         padding: 10px;
     }
 }
+
+
+.paneles {
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    height: 100vh;
+}
+
+.abierto {
+
+    flex: 5;
+}
+
+.panel{
+    border: solid 4px white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.dorado{
+    background-color: gold;
+}
