@@ -110,20 +110,28 @@ body {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    transition: transform 0.3s ease-in-out, flex 0.3s;
     flex: 1;
-
 }
 
 .abierto {
     flex: 5;
 }
 
+.shrinking{
+    transform: scale(0.9);
+}
+
+.expanding{
+    transform: scale(1.1);
+}
 
 .dorado{
     background-color: gold;
 }
 
+
 .panel > p:first-child{ transform: translateY(-100%);}
 .panel > p:last-child{ transform: translateY(100%);}
 .panel.abierto > p:first-child {transform: translateY(100%);}
-.panel.abierto > p:last-child {transform: translateY(-100%);}
+.panel.abierto > p:last-child {transform: translateY(-100%);} 

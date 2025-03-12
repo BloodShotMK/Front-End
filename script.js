@@ -10,14 +10,26 @@ menuToggle.addEventListener("click", () => {
 // Seleccionar los paneles
 let paneles = document.querySelectorAll('.panel');
 
+
 for(let i = 0; i < paneles.length; i++){
     paneles[i].addEventListener('click', function(){
         if(paneles[i].classList.contains('abierto')){
-            paneles[i].classList.remove('abierto');
-            alert('Cerrando panel' +i)
+            paneles[i].classList.add('expanding');
+            //alert('Cerrando panel' +i)
+
+            setTimeout(() => {
+                paneles[i].classList.remove('expanding');
+                paneles[i].classList.remove('abierto');
+            }, 150);
+
         } else {
-            paneles[i].classList.add('abierto');
-            alert('Abriendo panel' +i)
+            paneles[i].classList.add('shrinking'); // Primero encoge
+
+            setTimeout(() => {
+                paneles[i].classList.remove('shrinking'); // Quita "shrinking"
+                paneles[i].classList.add('abierto'); // Luego abre
+               // alert('Abriendo panel ' + i);
+            }, 150); // Pequeño retraso antes de abrir
         }
     });
 
