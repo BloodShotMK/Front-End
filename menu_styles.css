@@ -104,20 +104,26 @@ body {
     height: 100vh;
 }
 
-.abierto {
-
-    flex: 5;
-}
-
 .panel{
-    border: solid 4px white;
+    border: solid 4px black;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     flex: 1;
+
 }
+
+.abierto {
+    flex: 5;
+}
+
 
 .dorado{
     background-color: gold;
 }
+
+.panel > p:first-child{ transform: translateY(-100%);}
+.panel > p:last-child{ transform: translateY(100%);}
+.panel.abierto > p:first-child {transform: translateY(100%);}
+.panel.abierto > p:last-child {transform: translateY(-100%);}

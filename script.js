@@ -7,20 +7,25 @@ menuToggle.addEventListener("click", () => {
     nav.classList.toggle("active");
 });
 
+// Seleccionar los paneles
 let paneles = document.querySelectorAll('.panel');
 
 for(let i = 0; i < paneles.length; i++){
-    //algo aquí
-
     paneles[i].addEventListener('click', function(){
-        alert('click en panel ' +i);
-    }); 
-}   
+        if(paneles[i].classList.contains('abierto')){
+            paneles[i].classList.remove('abierto');
+            alert('Cerrando panel' +i)
+        } else {
+            paneles[i].classList.add('abierto');
+            alert('Abriendo panel' +i)
+        }
+    });
 
     paneles[i].addEventListener('mouseover', function(){
-            paneles[i].classList.add('dorado');
+        paneles[i].classList.add('dorado');
     });
 
     paneles[i].addEventListener('mouseout', function(){
         paneles[i].classList.remove('dorado');
-});
+    });
+}
