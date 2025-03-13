@@ -99,13 +99,15 @@ body {
 
 
 .paneles {
-    font-family: 'Times New Roman', Times, serif;
+    background-color: #b43e8f;
+    font-family: 'Handwritten', cursive;
+    font-size: 30px;
     display: flex;
     height: 100vh;
 }
 
 .panel{
-    border: solid 4px black;
+    border: solid 1px white;
     display: flex;
     align-items: center;
     flex-direction: column;
