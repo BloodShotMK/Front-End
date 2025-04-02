@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocalización y Polígono</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+</head>
+<body>
+    <h2>Ubicación del usuario</h2>
+    <p>Latitud: <span id="lat">-</span>, Longitud: <span id="lon">-</span></p>
+    <div id="map"></div>
+    <p id="message">Dibuja un polígono en el mapa</p>
+    <script src="script_map.js"></script>
+</body>
+</html>

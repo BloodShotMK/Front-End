@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Pizza</title>
+    <link rel="stylesheet" href="promesas.css">
+</head>
+<body>
+    <div class="container">
+        <h1>¡Ordena tu Pizza!</h1>
+        <input type="text" id="ingrediente" placeholder="Añadir ingrediente">
+        <button onclick="agregarIngrediente()">Agregar Ingrediente</button>
+        <button onclick="ordenarPizza()">Ordenar Pizza</button>
+        <p id="ingredientes-lista"></p>
+        <div class="pizza-container" id="pizza-container"></div>
+    </div>
+    <script src="promesas.js"></script>
+</body>
+</html>
