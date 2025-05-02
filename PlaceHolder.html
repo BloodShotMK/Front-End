@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Posts</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input, textarea, button {
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Posts JSONPlaceholder</h1>
+
+  <table id="postsTable">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Aquí se llenarán los posts -->
+    </tbody>
+  </table>
+
+  <h2>Crear nuevo Post</h2>
+  <input type="text" id="postTitle" placeholder="Título del post">
+  <textarea id="postBody" placeholder="Contenido del post"></textarea>
+  <button onclick="createPost()">Crear Post</button>
+
+  <script>
+    const apiURL = 'https://jsonplaceholder.typicode.com/posts';
+    const tableBody = document.querySelector('#postsTable tbody');
+
+    // Función para cargar posts
+    async function loadPosts() {
+      const response = await fetch(apiURL);
+      const posts = await response.json();
+      tableBody.innerHTML = ''; // Limpiar antes de cargar
+      posts.forEach(post => {
+        addPostRow(post);
+      });
+    }
+
+    // Función para agregar una fila a la tabla
+    function addPostRow(post) {
+      const row = document.createElement('tr');
+      row.setAttribute('data-id', post.id);
+
+      row.innerHTML = `
+        <td>${post.title}</td>
+        <td><button onclick="deletePost(${post.id}, this)">Eliminar</button></td>
+      `;
+
+      tableBody.appendChild(row);
+    }
+
+    // Función para crear un post
+    async function createPost() {
+      const title = document.getElementById('postTitle').value;
+      const body = document.getElementById('postBody').value;
+
+      if (!title || !body) {
+        alert('Por favor llena todos los campos');
+        return;
+      }
+
+      const response = await fetch(apiURL, {
+        method: 'POST',
+        body: JSON.stringify({
+          title: title,
+          body: body,
+          userId: 1
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+
+      const newPost = await response.json();
+      console.log('Post creado:', newPost);
+
+      addPostRow(newPost); // Agregar el nuevo post a la tabla
+      document.getElementById('postTitle').value = '';
+      document.getElementById('postBody').value = '';
+    }
+
+    // Función para eliminar un post
+    async function deletePost(postId, button) {
+      const response = await fetch(`${apiURL}/${postId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log(`Post ${postId} eliminado`);
+        const row = button.closest('tr');
+        row.remove();
+      } else {
+        alert('No se pudo eliminar el post.');
+      }
+    }
+
+    // Cargar posts al inicio
+    window.onload = loadPosts;
+  </script>
+</body>
+</html>

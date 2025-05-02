@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clima App</title>
+</head>
+<body>
+  <h1>Consulta el Clima</h1>
+
+  <div>
+    <input type="text" id="cityInput" placeholder="Ingresa una ciudad">
+    <button onclick="getWeather()">Buscar</button>
+  </div>
+
+  <div id="weatherResult"></div>
+
+  <script>
+    const apiKey = '90f77a22ccb90def67baec4af8ffd704'; // <-- Pega tu API KEY aquí
+
+    // Función para consultar clima
+    async function getWeather(city = 'Monterrey') {
+      const input = document.getElementById('cityInput').value;
+      const cityName = input || city;
+
+      try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric&lang=es`);
+
+            if (!response.ok) {
+    if (response.status === 401) {
+        throw new Error('API Key inválida o no autorizada. Verifica tu clave.');
+    } else if (response.status === 400 || response.status === 404) {
+        throw new Error('Ciudad no encontrada. Intenta otra.');
+    } else {
+        throw new Error('Error desconocido. Intenta más tarde.');
+    }
+}
+
+
+        const data = await response.json();
+        const weatherDiv = document.getElementById('weatherResult');
+        weatherDiv.innerHTML = `
+          <h2>Clima en ${data.name}</h2>
+          <p>Clima: ${data.weather[0].description}</p>
+          <p>Temperatura: ${data.main.temp}°C</p>
+        `;
+      } catch (error) {
+        document.getElementById('weatherResult').innerHTML = `<p style="color: red;">${error.message}</p>`;
+      }
+    }
+
+    // Mostrar Monterrey al cargar
+    window.onload = () => getWeather();
+  </script>
+</body>
+</html>
